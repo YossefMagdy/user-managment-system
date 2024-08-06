@@ -1,0 +1,7 @@
+.login-container {
+  background: linear-gradient(
+    to right,
+    rgba(254, 157, 0.9),
+    rgba(254, 157, 0.2)
+  );
+}
