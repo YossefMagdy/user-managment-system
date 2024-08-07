@@ -1,21 +1,30 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import SideBar from "../SideBar/SideBar";
+import style from "./masterLayout.module.css";
+import { useAuth } from "../../Core/Hooks/useAuth";
 
 export default function MasterLayout() {
+  const navigate = useNavigate();
+  const { isAuthenticated, loading } = useAuth();
+  if (loading) {
+    return <p>still loading ....</p>;
+  }
+  if (!loading && !isAuthenticated) {
+    navigate("/login");
+  }
+
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-3">
-            <SideBar />
-          </div>
-          <div className="col-md-9">
-            <Navbar />
-            <Outlet />
-          </div>
+      <main className={style.main_layout}>
+        <div className={style.sidebar}>
+          <SideBar />
         </div>
-      </div>
+        <div className={style.content}>
+          <Navbar />
+          <Outlet />
+        </div>
+      </main>
     </>
   );
 }

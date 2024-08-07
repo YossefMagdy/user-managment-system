@@ -6,21 +6,21 @@ import StoreContext from "../../store/StoreContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 const requestConfig = {
-  method: "POST",
-  headers: {
-    "Content-type": "application/json",
-  },
+  method: "post",
+  // headers: {
+  //   "Content-type": "application/json",
+  // },
 };
 
 export default function Login() {
-const navigate=useNavigate()
+  const navigate = useNavigate();
   const { addUserInfo } = useContext(StoreContext);
-  const { data: loginInfo, sendRequest } = useHttp(
-    "https://dummyjson.com/auth/login",
-    requestConfig
-  );
+  const {
+    data: loginInfo,
+    sendRequest,
+    isLoading,
+  } = useHttp("https://dummyjson.com/auth/login", requestConfig);
 
   const {
     register,
@@ -29,24 +29,21 @@ const navigate=useNavigate()
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await sendRequest(JSON.stringify(data));
-    
+    await sendRequest(data);
   };
-
 
   useEffect(() => {
     if (loginInfo) {
       addUserInfo(loginInfo);
-      toast(`Welcome ${loginInfo['firstName'] + ' ' + loginInfo['lastName']}`, {
+      toast(`Welcome ${loginInfo["firstName"] + " " + loginInfo["lastName"]}`, {
         autoClose: 1000,
         type: "success",
         closeOnClick: true,
         theme: "colored",
       });
-                  navigate('/dashboard');  
-
+      navigate("/dashboard");
     }
-  }, [addUserInfo,loginInfo,navigate]);
+  }, [addUserInfo, loginInfo, navigate]);
 
   return (
     <>
@@ -67,13 +64,13 @@ const navigate=useNavigate()
               className="text-start"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <label htmlFor="email" className="text-muted my-2">
-                Email
+              <label htmlFor="userName" className="text-muted my-2">
+                userName
               </label>
               <input
                 {...register("username", { required: "UserName Is Required" })}
                 type="text"
-                id="email"
+                id="userName"
                 placeholder="Enter you email"
                 className="form-control"
               />
@@ -100,7 +97,10 @@ const navigate=useNavigate()
               )}
 
               <button className="btn btn-warning w-100 text-white my-4">
-                Sign In
+                Sign In{" "}
+                <i
+                  className={`fa-solid  ${isLoading ? "fa-spinner fa-spin-pulse" : ""} `}
+                ></i>
               </button>
             </form>
           </div>

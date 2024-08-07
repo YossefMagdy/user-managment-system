@@ -1,0 +1,45 @@
+.userInfo {
+  p {
+    color: #feaf00;
+  }
+  .imgcontainer {
+    width: 8em;
+    height: 8em;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+    img {
+      width: 100%;
+    }
+  }
+}
+.title {
+  h5 {
+    display: flex;
+    align-items: center;
+  }
+  span {
+    display: inline-block;
+    width: 5px;
+    height: 30px;
+    background: linear-gradient(
+      to right,
+      rgba(254, 157, 0.9),
+      rgba(254, 157, 0.2)
+    );
+  }
+}
+.login_menu {
+  margin-top: 10px;
+  a {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    .ps-menu-label.css-12w9als {
+      flex-grow: unset !important;
+      -webkit-flex-grow: unset !important;
+      -webkit-box-flex: unset !important;
+    }
+  }
+}

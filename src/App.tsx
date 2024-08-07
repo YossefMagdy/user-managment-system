@@ -10,8 +10,12 @@ import Profile from "./Components/Profile/Profile";
 import NotFound from "./Components/NotFound/NotFound";
 
 import { ToastContainer } from "react-toastify";
-import { StoreContextProvider } from "./store/StoreContext";
+import StoreContext, { StoreContextProvider } from "./store/StoreContext";
+import ProtectedRoute from "./Core/Guard/ProtectedRoute";
+import Spinner from "./Components/Spinner/Spinner";
+import { useContext } from "react";
 function App() {
+  const { loading } = useContext(StoreContext);
   const routes = createBrowserRouter([
     {
       path: "",
@@ -24,24 +28,25 @@ function App() {
     },
     {
       path: "dashboard",
-      element: <MasterLayout />,
-      errorElement: <NotFound />,
+      element: <ProtectedRoute children={<MasterLayout />} />,
       children: [
         { index: true, element: <Home /> },
         { path: "home", element: <Home /> },
         { path: "users", element: <UserList /> },
         { path: "userData", element: <UserData /> },
         { path: "profile", element: <Profile /> },
+        { path: "*", element: <NotFound /> },
       ],
     },
   ]);
 
   return (
     <>
-    <StoreContextProvider>
-      <RouterProvider router={routes} />
-    </StoreContextProvider>
+      <StoreContextProvider>
+        <RouterProvider router={routes} />
+      </StoreContextProvider>
       <ToastContainer />
+      <Spinner loading={loading} />
     </>
   );
 }
