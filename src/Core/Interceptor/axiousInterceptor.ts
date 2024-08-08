@@ -15,7 +15,7 @@ export function setupAxiosInstance(baseURL: string) {
     function (error) {
       // Handle request error
       return Promise.reject(error);
-    }
+    },
   );
 
   // Add a response interceptor
@@ -27,7 +27,7 @@ export function setupAxiosInstance(baseURL: string) {
     function (error) {
       // Hide spinner or perform other actions
       return Promise.reject(error);
-    }
+    },
   );
 
   return axiosInstance;

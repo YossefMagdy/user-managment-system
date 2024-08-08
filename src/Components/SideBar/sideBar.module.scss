@@ -43,3 +43,16 @@
     }
   }
 }
+.menuItem_beforCollapse {
+  width: 70% !important;
+  margin: auto;
+}
+.menuItem_afterCollapse {
+  a {
+    width: fit-content;
+    margin: auto;
+    span {
+      margin: 0;
+    }
+  }
+}

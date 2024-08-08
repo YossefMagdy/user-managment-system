@@ -16,6 +16,7 @@ import Spinner from "./Components/Spinner/Spinner";
 import { useContext } from "react";
 function App() {
   const { loading } = useContext(StoreContext);
+
   const routes = createBrowserRouter([
     {
       path: "",

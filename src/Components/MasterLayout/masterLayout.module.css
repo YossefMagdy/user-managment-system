@@ -1,7 +1,12 @@
 .main_layout {
   display: flex;
   position: relative;
+  background-color: #fdfdfd;
 }
 .sidebar {
   height: 100vh;
+  position: relative;
+}
+.content {
+  flex-grow: 1;
 }

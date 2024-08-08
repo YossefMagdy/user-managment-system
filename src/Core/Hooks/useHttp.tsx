@@ -16,10 +16,10 @@ async function sendHttpRequest(url: string, config: any) {
   return response;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function useHttp(url: string, config: HttpConfig) {
+export default function useHttp<T>(url: string, config: HttpConfig) {
   const { setHttpLoading } = useContext(StoreContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState<T>();
   const sendRequest = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async function sendRequest(formData?: any) {
@@ -47,7 +47,7 @@ export default function useHttp(url: string, config: HttpConfig) {
       setIsLoading(false);
       setHttpLoading(false);
     },
-    [url, config, setHttpLoading]
+    [url, config, setHttpLoading],
   );
 
   useEffect(() => {
