@@ -58,3 +58,50 @@ td:last-child,
 th:last-child {
   border-radius: 0 10px 10px 0;
 }
+
+.table-container {
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.table-container::-webkit-scrollbar {
+  display: block;
+  height: 4px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: gray;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to right,
+    rgba(254, 157, 0.9),
+    rgba(254, 157, 0.2)
+  );
+  border-radius: 10px;
+}
+
+.searchBar {
+  position: relative;
+}
+.searchBar i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+}
+.PofileImg {
+  width: 100px !important;
+  height: 100px !important;
+  position: absolute;
+  top: 0;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

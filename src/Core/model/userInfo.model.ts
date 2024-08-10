@@ -38,19 +38,24 @@ interface Crypto {
   wallet: string;
   network: string;
 }
-
-export interface User {
-  id: number;
+export interface mainUser {
   firstName: string;
   lastName: string;
-  maidenName: string;
-  age: number;
-  gender: string;
   email: string;
   phone: string;
+  birthDate: string;
+  age: number | string;
+  image?: string;
+  id?: number;
+}
+
+export interface User extends mainUser {
+  id: number;
+
+  maidenName: string;
+  gender: string;
   username: string;
   password: string;
-  birthDate: string;
   image: string;
   bloodGroup: string;
   height: number;

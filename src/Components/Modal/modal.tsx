@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 interface modelCompoenentProps {
   show: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   closeModal: any;
+  handleaccept: any;
   modelBody: string;
 }
 
@@ -12,6 +13,7 @@ export default function ModalComponent({
   show,
   closeModal,
   modelBody,
+  handleaccept,
 }: modelCompoenentProps) {
   function handleClose() {
     closeModal();
@@ -25,7 +27,7 @@ export default function ModalComponent({
           <Button variant="secondary" onClick={handleClose}>
             No
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleaccept}>
             Yes
           </Button>
         </Modal.Footer>

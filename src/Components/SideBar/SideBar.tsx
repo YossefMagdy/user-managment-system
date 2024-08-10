@@ -1,24 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { NavLink, useNavigate } from "react-router-dom";
 import style from "./sideBar.module.scss";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import StoreContext from "../../store/StoreContext";
 
 interface sideBarProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  sideBarStatus: any;
+  sideBarcollapsed: any;
 }
-export default function SideBar({ sideBarStatus }: sideBarProps) {
+export default function SideBar({ sideBarcollapsed }: sideBarProps) {
   const { userInfo, handleUserLogout } = useContext(StoreContext);
-  const [collapsed, setCollapsed] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  function handleSideBarCollapsed() {
-    setCollapsed((prev) => {
-      sideBarStatus(!prev);
-      return !prev;
-    });
-  }
 
   function handleLogout() {
     handleUserLogout();
@@ -29,25 +21,22 @@ export default function SideBar({ sideBarStatus }: sideBarProps) {
     <>
       <Sidebar
         collapsedWidth="120px"
-        collapsed={collapsed}
+        collapsed={sideBarcollapsed}
         className={`sideBar-container  position-fixed h-100`}
       >
         <div className="container-fluid ">
           <section
-            className={`${style.title} mt-4 d-flex align-items-center justify-content-between`}
+            className={`${style.title} mt-4 d-flex align-items-center justify-content-between `}
           >
             <h5 className="m-0 me-2">
               <span className="me-2"></span> UMS
             </h5>
-            <button
-              className="btn d-block  text-center "
-              onClick={handleSideBarCollapsed}
-            >
-              <i className="fa-solid fa-bars"></i>
+            <button className="btn d-block  text-center ">
+              {/* <i className="fa-solid fa-bars" onClick={handleSidBarCollapse}></i> */}
             </button>
           </section>
           <section className={`${style.userInfo} text-center`}>
-            {!collapsed && (
+            {!sideBarcollapsed && (
               <div className={`${style.imgcontainer} mt-3`}>
                 <img src={userInfo.image} alt="user" />
               </div>
@@ -71,32 +60,32 @@ export default function SideBar({ sideBarStatus }: sideBarProps) {
             }}
           >
             <MenuItem
-              className={`my-2 ${collapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
+              className={`my-2 ${sideBarcollapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
               icon={<i className="fa-solid fa-house"></i>}
               component={<NavLink to="/dashboard/home" />}
             >
-              {!collapsed && <span>Home</span>}
+              {!sideBarcollapsed && <span>Home</span>}
             </MenuItem>
             <MenuItem
-              className={`my-2 ${collapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
+              className={`my-2 ${sideBarcollapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
               icon={<i className="fa-solid fa-users"></i>}
               component={<NavLink to="/dashboard/users" />}
             >
-              {!collapsed && <span>Users</span>}
+              {!sideBarcollapsed && <span>Users</span>}
             </MenuItem>
             <MenuItem
-              className={`my-2 ${collapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
+              className={`my-2 ${sideBarcollapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
               icon={<i className="fa-solid fa-user"></i>}
               component={<NavLink to="/dashboard/userData" />}
             >
-              {!collapsed && <span>User-Data</span>}
+              {!sideBarcollapsed && <span>Add user</span>}
             </MenuItem>
             <MenuItem
-              className={`my-2 ${collapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
+              className={`my-2 ${sideBarcollapsed ? style.menuItem_afterCollapse : style.menuItem_beforCollapse}`}
               icon={<i className="fa-solid fa-id-card"></i>}
               component={<NavLink to="/dashboard/profile" />}
             >
-              {!collapsed && <span>Profile</span>}
+              {!sideBarcollapsed && <span>Profile</span>}
             </MenuItem>
           </Menu>
         </div>

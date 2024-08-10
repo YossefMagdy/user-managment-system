@@ -6,6 +6,10 @@ import StoreContext from "../../store/StoreContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+interface LoginInfo {
+  firstName: string;
+  lastName: string;
+}
 const requestConfig = {
   method: "post",
   // headers: {
@@ -20,13 +24,18 @@ export default function Login() {
     data: loginInfo,
     sendRequest,
     isLoading,
-  } = useHttp("https://dummyjson.com/auth/login", requestConfig);
+  } = useHttp<LoginInfo>("https://dummyjson.com/auth/login", requestConfig);
 
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields, isSubmitted, isValid },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      username: "emilys",
+      password: "emilyspass",
+    },
+  });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await sendRequest(data);
@@ -59,11 +68,7 @@ export default function Login() {
                 You Must Fill the form first ...
               </div>
             )}
-            <form
-              action=""
-              className="text-start"
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className="text-start" onSubmit={handleSubmit(onSubmit)}>
               <label htmlFor="userName" className="text-muted my-2">
                 userName
               </label>

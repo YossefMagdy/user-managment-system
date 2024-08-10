@@ -8,7 +8,8 @@ import { useState } from "react";
 export default function MasterLayout() {
   const navigate = useNavigate();
   const { isAuthenticated, loading } = useAuth();
-  const [sideBarStatus, setSideStatus] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+
   if (loading) {
     return <p>still loading ....</p>;
   }
@@ -16,22 +17,22 @@ export default function MasterLayout() {
     navigate("/login");
   }
 
-  function onSideBarCollapse(collapsed: boolean) {
-    setSideStatus(collapsed);
+  function onSideBarCollapse() {
+    setCollapsed((prev) => !prev);
   }
 
   return (
     <>
       <main className={style.main_layout}>
         <div
-          style={{ width: `${sideBarStatus ? "140px" : "270px"}` }}
+          style={{ width: `${collapsed ? "120px" : "250px"}` }}
           className={style.sidebar}
         >
-          <SideBar sideBarStatus={onSideBarCollapse} />
+          <SideBar sideBarcollapsed={collapsed} />
         </div>
         <div className={style.content}>
-          <Navbar />
-          <div className="container">
+          <Navbar sideBarStatus={onSideBarCollapse} />
+          <div className="container h-100">
             <Outlet />
           </div>
         </div>

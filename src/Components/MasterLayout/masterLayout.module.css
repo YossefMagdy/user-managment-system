@@ -2,11 +2,16 @@
   display: flex;
   position: relative;
   background-color: #fdfdfd;
-}
-.sidebar {
   height: 100vh;
-  position: relative;
 }
+
+.sidebar {
+  height: 100%;
+  position: relative;
+  flex-shrink: 0; /* Prevent the sidebar from shrinking */
+}
+
 .content {
-  flex-grow: 1;
+  flex-grow: 1; /* Make the content take the available space */
+  overflow-x: hidden;
 }
