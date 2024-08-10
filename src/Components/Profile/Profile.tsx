@@ -39,10 +39,17 @@ export default function Profile() {
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
-        birthDate: data?.birthDate ? new Date(data?.birthDate)?.toISOString().split("T")[0] :'',
+        birthDate:  data?.birthDate ? (() => {
+          const date = new Date(data.birthDate);
+          return isNaN(date.getTime()) ? '' : date.toISOString().split("T")[0];
+        })() : '',
         age: data.age,
         image: "https://dummyjson.com/icon/noahh/128",
       });
+
+            console.log(new Date(data?.birthDate)?.toISOString().split("T")[0])
+            console.log(new Date(data?.birthDate)?.toString())
+
     }
   }, [data, reset]);
 
