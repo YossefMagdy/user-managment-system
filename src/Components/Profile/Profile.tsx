@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import StoreContext from "../../store/StoreContext";
 import useHttp from "../../Core/Hooks/useHttp";
 import { User } from "../../Core/model/userInfo.model";
+import moment from "moment";
 const reqHeader = {
   method: "get",
 };
@@ -39,16 +40,11 @@ export default function Profile() {
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
-        birthDate:  data?.birthDate ? (() => {
-          const date = new Date(data.birthDate);
-          return isNaN(date.getTime()) ? '' : date.toISOString().split("T")[0];
-        })() : '',
+        birthDate:  data?.birthDate ? moment(data.birthDate).format('YYYY-MM-DD') : '',
         age: data.age,
         image: "https://dummyjson.com/icon/noahh/128",
       });
 
-            console.log(new Date(data?.birthDate)?.toISOString().split("T")[0])
-            console.log(new Date(data?.birthDate)?.toString())
 
     }
   }, [data, reset]);

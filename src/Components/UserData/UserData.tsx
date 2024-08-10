@@ -3,6 +3,7 @@ import { mainUser, User } from "../../Core/model/userInfo.model";
 import { useContext, useEffect } from "react";
 import StoreContext from "../../store/StoreContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export default function UserData() {
   const { addNewUser, userToEdit, editUser } = useContext(StoreContext);
@@ -29,9 +30,7 @@ export default function UserData() {
       lastName: userDetails?.lastName ? userDetails?.lastName : "",
       email: userDetails?.email ? userDetails?.email : "",
       phone: userDetails?.phone ? userDetails?.phone : "",
-      birthDate: userDetails?.birthDate
-        ? new Date(userDetails?.birthDate).toISOString().split("T")[0]
-        : "",
+      birthDate:  userDetails?.birthDate ? moment(userDetails.birthDate).format('YYYY-MM-DD') : '',
       age: userDetails?.age ? userDetails?.age : "",
     },
   });
