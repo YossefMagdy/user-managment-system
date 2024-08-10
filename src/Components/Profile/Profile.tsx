@@ -39,7 +39,7 @@ export default function Profile() {
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
-        birthDate: new Date(data?.birthDate).toISOString().split("T")[0],
+        birthDate: data?.birthDate ? new Date(data?.birthDate)?.toISOString().split("T")[0] :'',
         age: data.age,
         image: "https://dummyjson.com/icon/noahh/128",
       });
