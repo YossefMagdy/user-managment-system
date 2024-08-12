@@ -62,11 +62,7 @@ export default function UserData() {
     <>
       <h4>{editMode ? "update User" : "add User"} </h4>
       <div className="hr-spacer my-3"></div>
-      {isSubmitted && !isValid && (
-        <div className="alert alert-danger">
-          You Must Fill the form first ...
-        </div>
-      )}
+    
       <form
         className="h-100 d-flex justify-content-center"
         onSubmit={editMode ? handleSubmit(onEdit) : handleSubmit(onSubmit)}
@@ -75,6 +71,11 @@ export default function UserData() {
           className="row align-items-center w-75 shadow  p-4    mt-4 rounded"
           style={{ height: "fit-content" }}
         >
+            {isSubmitted && !isValid && (
+        <div className="alert alert-danger">
+          You Must Fill the form first ...
+        </div>
+      )}
           <div className="col-md-6">
             <div>
               <label htmlFor="FirstName">First Name</label>
