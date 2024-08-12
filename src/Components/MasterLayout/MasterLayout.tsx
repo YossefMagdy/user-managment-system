@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function MasterLayout() {
   const navigate = useNavigate();
   const { isAuthenticated, loading } = useAuth();
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<boolean>(true);
 
   if (loading) {
     return <p>still loading ....</p>;
