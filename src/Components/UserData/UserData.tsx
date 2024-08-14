@@ -30,7 +30,9 @@ export default function UserData() {
       lastName: userDetails?.lastName ? userDetails?.lastName : "",
       email: userDetails?.email ? userDetails?.email : "",
       phone: userDetails?.phone ? userDetails?.phone : "",
-      birthDate:  userDetails?.birthDate ? moment(userDetails.birthDate).format('YYYY-MM-DD') : '',
+      birthDate: userDetails?.birthDate
+        ? moment(userDetails.birthDate).format("YYYY-MM-DD")
+        : "",
       age: userDetails?.age ? userDetails?.age : "",
     },
   });
@@ -62,7 +64,7 @@ export default function UserData() {
     <>
       <h4>{editMode ? "update User" : "add User"} </h4>
       <div className="hr-spacer my-3"></div>
-    
+
       <form
         className="h-100 d-flex justify-content-center"
         onSubmit={editMode ? handleSubmit(onEdit) : handleSubmit(onSubmit)}
@@ -71,11 +73,11 @@ export default function UserData() {
           className="row align-items-center w-75 shadow  p-4    mt-4 rounded"
           style={{ height: "fit-content" }}
         >
-            {isSubmitted && !isValid && (
-        <div className="alert alert-danger">
-          You Must Fill the form first ...
-        </div>
-      )}
+          {isSubmitted && !isValid && (
+            <div className="alert alert-danger">
+              You Must Fill the form first ...
+            </div>
+          )}
           <div className="col-md-6">
             <div>
               <label htmlFor="FirstName">First Name</label>
@@ -92,9 +94,7 @@ export default function UserData() {
               />
             </div>
             {errors.firstName && (
-              <div className="alert alert-info">
-                {errors?.firstName?.message}
-              </div>
+              <div className="text-danger">* {errors?.firstName?.message}</div>
             )}
             <div className="my-3">
               <label htmlFor="email">Email</label>
@@ -113,7 +113,7 @@ export default function UserData() {
                 onKeyUp={() => trigger("email")}
               />
               {errors.email && (
-                <div className="alert alert-info">{errors?.email?.message}</div>
+                <div className="text-danger">* {errors?.email?.message}</div>
               )}
             </div>
 
@@ -137,7 +137,7 @@ export default function UserData() {
               />
             </div>
             {errors.phone && (
-              <div className="alert alert-info">{errors?.phone?.message}</div>
+              <div className="text-danger">* {errors?.phone?.message}</div>
             )}
           </div>
           <div className="col-md-6">
@@ -153,9 +153,7 @@ export default function UserData() {
               />
             </div>
             {errors.lastName && (
-              <div className="alert alert-info">
-                {errors?.lastName?.message}
-              </div>
+              <div className="text-danger">*{errors?.lastName?.message}</div>
             )}
             <div className="my-3">
               <label htmlFor="Age">Age</label>
@@ -171,7 +169,7 @@ export default function UserData() {
                 placeholder="Enter Your Age"
               />
               {errors.age && (
-                <div className="alert alert-info">{errors?.age?.message}</div>
+                <div className="text-danger">* {errors?.age?.message}</div>
               )}
             </div>
 
@@ -187,9 +185,7 @@ export default function UserData() {
               />
             </div>
             {errors.birthDate && (
-              <div className="alert alert-info">
-                {errors?.birthDate?.message}
-              </div>
+              <div className="text-danger">*{errors?.birthDate?.message}</div>
             )}
           </div>
 

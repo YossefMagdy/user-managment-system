@@ -101,8 +101,8 @@ function storeReducer(state: state, action: any) {
     localStorage.setItem(
       "userList",
       JSON.stringify(
-        state.userList.filter((user) => user.id != action.payload.id),
-      ),
+        state.userList.filter((user) => user.id != action.payload.id)
+      )
     );
 
     return {
@@ -113,7 +113,7 @@ function storeReducer(state: state, action: any) {
   if (action.type === "addNewUser") {
     localStorage.setItem(
       "userList",
-      JSON.stringify([...state.userList, action.payload]),
+      JSON.stringify([...state.userList, action.payload])
     );
     return {
       ...state,
@@ -128,7 +128,7 @@ function storeReducer(state: state, action: any) {
   }
   if (action.type === "editUser") {
     const index = state.userList.findIndex(
-      (user) => user.id == action.payload.id,
+      (user) => user.id == action.payload.id
     );
     if (index !== -1) {
       const updatedUserList = [
@@ -174,7 +174,7 @@ export function StoreContextProvider({ children }: StoreContextProviderProps) {
         payload: userInfo,
       });
     },
-    [],
+    []
   );
   const appOnInit = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -183,7 +183,7 @@ export function StoreContextProvider({ children }: StoreContextProviderProps) {
         type: "appOnInit",
       });
     },
-    [],
+    []
   );
 
   useEffect(() => {
@@ -198,11 +198,17 @@ export function StoreContextProvider({ children }: StoreContextProviderProps) {
   }, []);
 
   const deleteUserFromList = useCallback(function deleteUserFromList(
-    user: User,
+    user: User
   ) {
     setStoreState({
       type: "deleteUserFromList",
       payload: user,
+    });
+    toast(`${user["firstName"] + " " + user["lastName"]} delete successfully`, {
+      autoClose: 1000,
+      type: "success",
+      closeOnClick: true,
+      theme: "colored",
     });
   }, []);
 
