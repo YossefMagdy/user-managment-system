@@ -1,4 +1,4 @@
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import AuthLayout from "./Components/AuthLayout/AuthLayout";
 import Login from "./Components/Login/Login";
@@ -17,7 +17,7 @@ import { useContext } from "react";
 function App() {
   const { loading } = useContext(StoreContext);
 
-  const routes = createHashRouter([
+  const routes = createBrowserRouter([
     {
       path: "",
       element: <AuthLayout />,
