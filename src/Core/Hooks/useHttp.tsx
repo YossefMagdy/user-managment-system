@@ -9,7 +9,7 @@ interface HttpConfig extends RequestInit {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function sendHttpRequest(url: string, config: any) {
   const response = await axios(url, config);
-  if (!(response.statusText === "OK")) {
+  if (!(response.statusText === "")) {
     const errorData = await response.data();
     throw new Error(errorData.message || "Request failed");
   }
@@ -23,6 +23,7 @@ export default function useHttp<T>(url: string, config: HttpConfig) {
   const sendRequest = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async function sendRequest(formData?: any) {
+      console.log(formData)
       setIsLoading(true);
       setHttpLoading(true);
       try {
@@ -30,6 +31,7 @@ export default function useHttp<T>(url: string, config: HttpConfig) {
           ...config,
           data: formData,
         });
+        console.log("response", response);
         setData(response.data);
       } catch (err) {
         const error = err as AxiosError;
